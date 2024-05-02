@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/CRMCore/bin
+/CRMCore/obj
+/CRMCore.Application/bin
+/CRMCore.Application/obj
+/CRMCore.EntityFrameWorkCore/bin
+/CRMCore.EntityFrameWorkCore/obj

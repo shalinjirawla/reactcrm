@@ -1,0 +1,47 @@
+/* -------------------------------- Login-Page --------------------------- */
+
+.loginForm, .registerForm {
+    max-width: 35%;
+    border: 1px solid lightgrey;
+    border-radius: 7px;
+    padding: 2%;
+    margin: auto;
+    margin-top: 7%;
+}
+
+.login-form-button, .register-form-button {
+    width: 100%;
+}
+
+
+/* -------------------------------- Registration-Page --------------------------- */
+
+.registerBtn {
+    font-weight: 700 !important;
+    min-height: 35px !important;
+    color: var(--primary-color);
+    background: #fff;
+    border-color: var(--primary-color);
+    border-radius: 3px;
+    margin-right: 0;
+}
+
+.btnSpace {
+    width: inherit;
+}
+
+
+/* -------------------------------- Email-Verification-Page --------------------------- */
+
+.mainInsideDivBox {
+    padding: 0 10%;
+}
+
+.box {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 3%;
+    margin: 2% 0;
+    font-size: 14px;
+    background-color: #e1e7ee;
+}

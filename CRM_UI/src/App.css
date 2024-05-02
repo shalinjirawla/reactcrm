@@ -1,0 +1,327 @@
+.App {
+  text-align: center;
+}
+
+:root {
+  --sidebarWidth: 50%;
+  --primary-color1: #003b95;
+  --shadow-color1: #003c953a;
+  --shadow-color: #2276e31a;
+  --dark1-color: #1c3f6c;
+  --dark-color: #3f5376;
+  --primary-color: #2276e3;
+  --dark-shadow: #1958b6;
+  --dark2-shadow: #29598a;
+  --back-color: #e1e7ee;
+  --primary-font: 18px;
+  --secondary-font: 16px;
+  --third-font: 14px;
+  --label-font: 12px;
+  --tritary-font: 22px;
+  --small-font: 10px;
+  --little-font: 9px;
+  --optimal-font: 11px;
+  --medium-icon-size: 20px;
+  --primary-fontWeight: 500;
+  --secondary-fontWeight: 600;
+  --third-fontWeight: 700;
+  --label-fontWeight: 400;
+}
+
+
+/* -------------------------------- Common --------------------------- */
+
+.d-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.m-0 {
+  margin: 0;
+}
+.mAuto {
+  margin: auto;
+}
+.marginVerticalAuto {
+  margin: auto 0;
+}
+.width100 {
+  width: 100%;
+}
+.cursorP {
+  cursor: pointer;
+}
+.textAlignStart {
+  text-align: start;
+}
+.textAlignCenter {
+  text-align: center;
+}
+.textAlignEnd {
+  text-align: end;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.appButton {
+  min-width: 40%;
+  margin: 0 1%;
+  font-weight: 700 !important;
+  min-height: 40px !important;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.appPrimaryButton {
+  min-width: 40%;
+  font-weight: 700 !important;
+  min-height: 40px !important;
+  color: #fff;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: 3px;
+  margin-right: 0;
+}
+
+.appButton:focus, .appButton:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color); 
+}
+
+.appPrimaryButton:hover {
+  color: #fff !important;
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.downloadBtn {
+  color: #fff;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: 3px;
+}
+.downloadBtn:hover {
+  color: #fff !important;
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.formWidth {
+  min-width: 75%;
+}
+
+.datePicker {
+  width: 100%;
+}
+
+.inputNumber {
+  width: 100%;
+}
+
+/* ----------------------------------- Layout ------------------------------ */
+
+.mainLayout {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  padding: 0;
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  z-index: 1111;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: -webkit-fill-available;
+  margin: 0 1%;
+}
+
+.mainRouteDiv {
+  position: relative;
+  min-height: 90vh;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.userIcon, .userDownArrow {
+  margin: 0 8%;
+}
+.siderMenu .ant-menu-item, .siderMenu .ant-menu-submenu {
+  padding-left: 24px !important;
+  font-size: 14px !important;
+  margin: 3% 1% !important;
+}
+.siderMenu .ant-menu-item-icon {
+  font-size: 16px !important;
+}
+.siderMenu .ant-menu-item-selected {
+  background-color: var(--primary-color) !important;
+  background-color: var(--shadow-color) !important;
+  color: var(--primary-color) !important;
+  border-radius: 7px;
+}
+
+.logoIcon {
+  font-size: 24px;
+  margin-right: 4%;
+}
+
+.userProfileDiv {
+  width: 15%;
+  display: flex;
+  justify-content: end;
+}
+
+.content {
+  margin: 24px 16px;
+  padding: 24;
+  height: 280;
+  overflow-y: scroll;
+}
+
+.dashboardTab .ant-tabs-nav {
+  position: fixed;
+  width: 82%;
+  z-index: 11;
+  background: #fff;
+}
+
+.spinLoader {
+  font-size: 50px !important;
+  position: fixed !important;
+  top: 50%;
+  left: 50%;
+}
+
+
+.ant-layout .ant-layout-sider {
+  background: #e1e7ee;
+}
+.siderMenu .ant-menu {
+  background: #e1e7ee !important;
+}
+
+.mainInsideDiv {
+  padding: 2% 2%;
+}
+
+/* ----------------------------------------- Scrollbar --------------------------------- */
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #fff;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px #181818;
+  background-color: #555;
+}
+
+/* -------------------------------------------- Filter Box ---------------------------------------- */
+
+.allPageHeader {
+  text-align: left !important;
+}
+
+/* -------------------------------------------- Modal ---------------------------------------- */
+
+.appModal .ant-modal-title {
+  font-size: 18px;
+}
+.appModal .ant-modal-close {
+  top: auto;
+}
+
+.addUserForm .ant-form-item {
+  margin-bottom: 7px;
+}
+.profileForm .ant-col .ant-form-item-label {
+  width: 35%;
+  text-align: left;
+}
+
+/* -------------------------------------------- Table ---------------------------------------- */
+
+.tableEditIcon {
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.tableDeleteIcon {
+  color: darkred;
+  font-size: 18px;
+}
+
+/* -------------------------------------------- Tag ---------------------------------------- */
+
+.tagFont {
+  font-size: 12px;
+  font-weight: 500;
+}
+.borderTag {
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 50%;
+}
+
+/* -------------------------------------------- Select ---------------------------------------- */
+
+.renderLabel .ant-select-item {
+  line-height: 2;
+}
+
+/* -------------------------------------------- Popover ---------------------------------------- */
+
+.popover-content {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px;
+}
+.popover-bg {
+  padding: 20% 30%;
+  cursor: pointer;
+}
+.popover-bg.active {
+  background-color: #e1e7ee;
+}
+.mTop-Content {
+  margin-top: 5%;
+}
+
+/* -------------------------------- mediaQuery --------------------------- */
+
+@media only screen and (max-width: 768px) {
+  .tabBtn {
+    font-weight: 600 !important;
+    min-height: 30px !important;
+  }
+}
