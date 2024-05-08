@@ -226,6 +226,22 @@ export const getExportExcelFileByLead = async (tenantId, tenantAdminId, userId) 
     return await axiosInstance.get(`${subUrl}`);
 };
 
+export const getAllLeadByTimePeriod = async (timePeriod, tenantId, tenantAdminId, userId) => {
+    let subUrl = `${baseUrl}/Lead/GetLeadByTimePeriod?timePeriod=${timePeriod}`;
+
+    if (tenantId) {
+        subUrl += '&tenantId=' + tenantId;
+    }
+    if (tenantAdminId) {
+        subUrl += '&tenantAdminId=' + tenantAdminId;
+    }
+    if (userId) {
+        subUrl += '&userId=' + userId;
+    }
+
+    return await axiosInstance.get(`${subUrl}`);
+};
+
 
 // --------------------------------- Opportunities ---------------------------------
 
@@ -268,6 +284,22 @@ export const getExportExcelFileByOpportunity = async (tenantId, tenantAdminId, u
     }
     if (userId) {
         subUrl += '?userId=' + userId;
+    }
+
+    return await axiosInstance.get(`${subUrl}`);
+};
+
+export const getAllOpportunityByTimePeriod = async (timePeriod, tenantId, tenantAdminId, userId) => {
+    let subUrl = `${baseUrl}/Opportunity/GetOpportunityByTimePeriod?timePeriod=${timePeriod}`;
+
+    if (tenantId) {
+        subUrl += '&tenantId=' + tenantId;
+    }
+    if (tenantAdminId) {
+        subUrl += '&tenantAdminId=' + tenantAdminId;
+    }
+    if (userId) {
+        subUrl += '&userId=' + userId;
     }
 
     return await axiosInstance.get(`${subUrl}`);

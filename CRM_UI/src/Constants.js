@@ -13,6 +13,16 @@ export const filterSelectData = [
     }
 ];
 
+export const timePeriodList = [
+    { id: 1, name: 'Today', _id: 'today' },
+    { id: 2, name: 'Last 7 days', _id: 'days_7' },
+    { id: 3, name: 'Last 14 days', _id: 'days_14' },
+    { id: 4, name: 'Last 30 days', _id: 'days_30' },
+    { id: 5, name: 'Last 60 days', _id: 'days_60' },
+    { id: 6, name: 'Last 90 days', _id: 'days_90' },
+    { id: 7, name: 'Last 365 days', _id: 'days_365' }
+];
+
 export const activeStatusList = [
     { id: 1, name: 'Active', _id: 'Active' },
     { id: 2, name: 'InActive', _id: 'InActive' }

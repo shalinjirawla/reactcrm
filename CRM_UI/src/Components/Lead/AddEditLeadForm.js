@@ -1,5 +1,5 @@
 import { Col, Divider, Form, Row } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Selectable from '../Selectable';
 import AppButton from '../AppButton';
 import { leadCustomerNeedList, leadStageList, leadStatusList, leadTypeList } from '../../Constants';

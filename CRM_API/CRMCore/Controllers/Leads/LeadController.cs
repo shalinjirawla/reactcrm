@@ -167,5 +167,58 @@ namespace CRMCore.Web.Controllers.Leads
                 Data = base64String
             });
         }
+
+        [HttpGet("GetLeadByTimePeriod")]
+        public IActionResult GetDataByTimePeriod(string timePeriod, int? tenantId = null, int? tenantAdminId = null, int? userId = null)
+        {
+            DateTime startDate;
+            switch (timePeriod)
+            {
+                case "today":
+                    startDate = DateTime.Today;
+                    break;
+                case "days_7":
+                    startDate = DateTime.Today.AddDays(-6);
+                    break;
+                case "days_14":
+                    startDate = DateTime.Today.AddDays(-13);
+                    break;
+                case "days_30":
+                    startDate = DateTime.Today.AddDays(-29);
+                    break;
+                case "days_60":
+                    startDate = DateTime.Today.AddDays(-59);
+                    break;
+                case "days_90":
+                    startDate = DateTime.Today.AddDays(-89);
+                    break;
+                case "days_365":
+                    startDate = DateTime.Today.AddDays(-364);
+                    break;
+                default:
+                    return BadRequest("Invalid time period.");
+            }
+
+            IEnumerable<LeadVM> filteredData;
+
+            if (tenantId != null)
+            {
+                filteredData = ILead.GetLeadsByTenant(tenantId.Value).Where(d => d.CreatedOn >= startDate).ToList();
+            }
+            else if (tenantAdminId != null)
+            {
+                filteredData = ILead.GetLeadsByTenantAdmin(tenantAdminId.Value).Where(d => d.CreatedOn >= startDate).ToList();
+            }
+            else if (userId != null)
+            {
+                filteredData = ILead.GetLeadsByUser(userId.Value).Where(d => d.CreatedOn >= startDate).ToList();
+            }
+            else
+            {
+                filteredData = ILead.GetLeads().Where(d => d.CreatedOn >= startDate).ToList();
+            }
+
+            return Ok(filteredData);
+        }
     }
 }

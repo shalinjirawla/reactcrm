@@ -1,0 +1,75 @@
+/* -------------------------------- Tab --------------------------- */
+
+.dashboardTab .ant-tabs-nav {
+    position: fixed;
+    width: 82%;
+    z-index: 11;
+    background: #fff;
+}
+.dashboardTab .ant-tabs-tab-btn {
+    font-size: var(--secondary-font);
+}
+.tabBodyTopMargin {
+    margin-top: 5%;
+}
+.spinLoader {
+    font-size: 50px !important;
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+}
+
+/* -------------------------------- Lead --------------------------- */
+
+.timePeriod {
+    width: 92%;
+}
+.marginCardAuto {
+    margin-right: auto;
+}
+.cardHeading {
+    font-size: var(--secondary-font);
+}
+.countCard {
+    border-radius: 10px;
+    width: 95%;
+}
+.secondRowLeadCard {
+    border-radius: 10px;
+    height: 22rem;
+    width: 96%;
+}
+.stageCard {
+    border-radius: 10px;
+    height: 22rem;
+    width: 97%;
+}
+.customerNeedCard {
+    border-radius: 10px;
+    height: 22rem;
+    width: 98%;
+}
+
+/* -------------------------------- Opportunity --------------------------- */
+
+.wonVsLostCard {
+    border-radius: 10px;
+    height: 16.3rem;
+    width: 97.5%;
+}
+.secondRowNumberCard .ant-col-xs-6 {
+    max-width: 100%;
+}
+.opportunityStageCard {
+    border-radius: 10px;
+    height: 19rem;
+    width: 97.8%;
+}
+.top5OpporunityCard {
+    border-radius: 10px;
+    height: 19rem;
+    max-width: 97%;
+}
+/* .tableCell .ant-table-cell {
+    height: 2.5rem !important;
+} */
