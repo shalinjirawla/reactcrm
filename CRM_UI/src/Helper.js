@@ -20,8 +20,8 @@ export const filterData = (arr, val) => {
     }
 };
 
-export const parseData = (arr) => {
-    return JSON.parse(arr);
+export const parseData = (obj) => {
+    return JSON.parse(obj);
 };
 
 export const getSelectOptionData = (item, index, className) => {

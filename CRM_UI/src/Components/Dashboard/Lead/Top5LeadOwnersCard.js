@@ -1,7 +1,7 @@
 import { Row, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-const LeadOwner = ({ leadList }) => {
+const Top5LeadOwnersCard = ({ leadList }) => {
 
     const [top5OwnerLeads, setTop5OwnerLeads] = useState([]);
 
@@ -45,4 +45,4 @@ const LeadOwner = ({ leadList }) => {
     );
 }
 
-export default LeadOwner;
+export default Top5LeadOwnersCard;

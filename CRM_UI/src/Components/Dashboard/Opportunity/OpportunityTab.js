@@ -9,9 +9,9 @@ import { parseData } from '../../../Helper';
 import dayjs from 'dayjs';
 import { getAllOpportunity, getAllOpportunityByTenant, getAllOpportunityByTenantAdmin, getAllOpportunityByTimePeriod, getAllOpportunityByUser } from '../../../Api/Api';
 import WonVsLostCard from './WonVsLostCard';
-import Top5Opportunities from './Top5Opportunities';
+import Top5OpportunitiesCard from './Top5OpportunitiesCard';
 
-const OpportunityDashboard = () => {
+const OpportunityTab = () => {
 
     const { currentRole, currUserData } = useContext(AuthContext) ?? {};
     const [timePeriodForm] = Form.useForm();
@@ -24,8 +24,6 @@ const OpportunityDashboard = () => {
     const [currentQuarterTotalAmountValue, setCurrentQuarterTotalAmountValue] = useState(0);
     const [currentMonthOpportunityCount, setCurrentMonthOpportunityCount] = useState(0);
     const [currentMonthTotalAmountValue, setCurrentMonthTotalAmountValue] = useState(0);
-    const [totalWonAmount, setTotalWonAmount] = useState(0);
-    const [totalLostAmount, setTotalLostAmount] = useState(0);
 
     useEffect(() => {
         fetchOpportunities();
@@ -74,14 +72,7 @@ const OpportunityDashboard = () => {
     const fetchWonLostOpportunities = () => {
         const wonOpportunities = timePeriodOpportunityList.filter(w => w?.opportunityStages?.stage === 'Closed won');
         const lostOpportunities = timePeriodOpportunityList.filter(l => l?.opportunityStages?.stage === 'Closed lost');
-
         setWonLostOpportunityCount({ closedWon: wonOpportunities?.length, closedLost: lostOpportunities?.length });
-
-        const totalWonAmount = wonOpportunities.reduce((acc, opportunity) => acc + (opportunity?.contractValue || 0), 0);
-        const totalLostAmount = lostOpportunities.reduce((acc, opportunity) => acc + (opportunity?.contractValue || 0), 0);
-
-        setTotalWonAmount(totalWonAmount);
-        setTotalLostAmount(totalLostAmount);
     };
 
     const fetchCurrentQuarterOpportunities = () => {
@@ -167,7 +158,7 @@ const OpportunityDashboard = () => {
             <Row align='top'>
                 <Col xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Card className='wonVsLostCard'>
-                        <WonVsLostCard opportunityList={opportunityList} wonCount={[totalWonAmount]} lostCount={[totalLostAmount]} />
+                        <WonVsLostCard opportunityList={opportunityList} />
                     </Card>
                 </Col>
                 <Col xl={12} lg={12} md={12} sm={12} xs={12} className='secondRowNumberCard'>
@@ -210,7 +201,7 @@ const OpportunityDashboard = () => {
                 </Col>
                 <Col xl={10} lg={10} md={10} sm={10} xs={10}>
                     <Card className='top5OpporunityCard'>
-                        <Top5Opportunities opportunityList={opportunityList} />
+                        <Top5OpportunitiesCard opportunityList={opportunityList} />
                     </Card>
                 </Col>   
             </Row>
@@ -218,4 +209,4 @@ const OpportunityDashboard = () => {
     );
 }
 
-export default OpportunityDashboard;
+export default React.memo(OpportunityTab);

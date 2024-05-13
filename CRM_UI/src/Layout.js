@@ -9,7 +9,7 @@ import { AuthContext } from './Context/AuthProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import AppButton from './Components/AppButton';
 import { parseData } from './Helper';
-import { setProfileData } from './Redux/Features/UserDataSlice';
+import { setAccountData, setContactData, setProfileData } from './Redux/Features/UserDataSlice';
 
 const Layouts = () => {
 
@@ -32,6 +32,8 @@ const Layouts = () => {
             onOk: async () => {
                 setUser(null);
                 dispatch(setProfileData(null));
+                dispatch(setContactData(null));
+                dispatch(setAccountData(null));
                 localStorage.clear();
                 navigate('/login');
                 message.success('You are Successfully Logout !!!');
@@ -151,4 +153,4 @@ const Layouts = () => {
     );
 }
 
-export default Layouts;
+export default React.memo(Layouts);

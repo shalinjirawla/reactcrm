@@ -5,7 +5,7 @@ import { Chart, ArcElement, Title, Legend, Tooltip } from 'chart.js'
 import { leadStatusList } from '../../../Constants';
 Chart.register(ArcElement, Title, Legend, Tooltip);
 
-const LeadStatus = ({ timePeriodLeadList }) => {
+const StatusCard = ({ timePeriodLeadList }) => {
     
     const [leadStatusCountList, setLeadStatusCountList] = useState({ contacted: 0, done: 0, inProgress: 0, lost: 0, new: 0, unableToConnect: 0 });
 
@@ -137,4 +137,4 @@ const LeadStatus = ({ timePeriodLeadList }) => {
     );
 }
 
-export default LeadStatus;
+export default StatusCard;

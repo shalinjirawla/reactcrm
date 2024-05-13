@@ -56,15 +56,24 @@ const User = ({ screenType }) => {
     const [isEditUser, setIsEditUser] = useState(false);
     const [userList, setUserList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
     
     const onSearch = (value) => {
-        const temp = filterData(userList, value);
-        setFilterTable(temp);
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(userList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
     useEffect(() => {
-        fetchUsers();
-    }, []);
+        setLoading(true);
+        setTimeout(() => {
+            if (currentRole === 'HostAdmin' || (currentRole !== 'HostAdmin' && currentRole !== 'HostUser' && currentRole !== 'Admin' && currentRole !== 'User')) fetchUsers();
+            setLoading(false);
+        }, 1000);
+    }, [currentRole]);
 
     const fetchUsers = async () => {
         let res;
@@ -232,6 +241,7 @@ const User = ({ screenType }) => {
                 dataSource={filterTable === null ? userList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 20%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditUser ? 'Update User' : 'Add User'}
@@ -252,4 +262,4 @@ const User = ({ screenType }) => {
     );
 }
 
-export default User;
+export default React.memo(User);

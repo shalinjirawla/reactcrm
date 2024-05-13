@@ -75,15 +75,24 @@ const Opportunity = ({ screenType }) => {
     const [isEditOpportunity, setIsEditOpportunity] = useState(false);
     const [opportunityList, setOpportunityList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onSearch = (value) => {
-        const temp = filterData(opportunityList, value);
-        setFilterTable(temp);
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(opportunityList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
-    useEffect(() => {
-        fetchOpportunities();
-    }, []);
+    useEffect(() => {  
+        setLoading(true);
+        setTimeout(() => {
+            fetchOpportunities();
+            setLoading(false);
+        }, 1000);
+    }, [currentRole]);
 
     const fetchOpportunities = async () => {
         let res;
@@ -287,6 +296,7 @@ const Opportunity = ({ screenType }) => {
                 dataSource={filterTable === null ? opportunityList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 50%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditOpportunity ? 'Update Opportunity' : 'Add Opportunity'}
@@ -307,4 +317,4 @@ const Opportunity = ({ screenType }) => {
     );
 }
 
-export default Opportunity;
+export default React.memo(Opportunity);

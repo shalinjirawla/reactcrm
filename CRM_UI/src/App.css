@@ -200,21 +200,6 @@ h1, h2, h3, h4, h5, h6, p {
   overflow-y: scroll;
 }
 
-.dashboardTab .ant-tabs-nav {
-  position: fixed;
-  width: 82%;
-  z-index: 11;
-  background: #fff;
-}
-
-.spinLoader {
-  font-size: 50px !important;
-  position: fixed !important;
-  top: 50%;
-  left: 50%;
-}
-
-
 .ant-layout .ant-layout-sider {
   background: #e1e7ee;
 }

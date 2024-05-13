@@ -3,16 +3,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Selectable from '../../Selectable';
 import { timePeriodList } from '../../../Constants';
 import NumbersCard from './NumbersCard';
-import LeadStatus from './LeadStatus';
-import LeadDynamics from './LeadDynamics';
-import LeadOwner from './LeadOwner';
-import LeadStage from './LeadStage';
-import LeadCustomerNeed from './LeadCustomerNeed';
 import { getAllLead, getAllLeadByTenant, getAllLeadByTenantAdmin, getAllLeadByTimePeriod, getAllLeadByUser } from '../../../Api/Api';
 import { parseData } from '../../../Helper';
 import { AuthContext } from '../../../Context/AuthProvider';
+import StatusCard from './StatusCard';
+import DynamicsByMonthCard from './DynamicsByMonthCard';
+import Top5LeadOwnersCard from './Top5LeadOwnersCard';
+import StageCard from './StageCard';
+import CustomerNeedCard from './CustomerNeedCard';
 
-const LeadDashboard = () => {
+const LeadTab = () => {
 
     const { currentRole, currUserData } = useContext(AuthContext) ?? {};
     const [timePeriodForm] = Form.useForm();
@@ -146,17 +146,17 @@ const LeadDashboard = () => {
             <Row align='top'>
                 <Col xl={8} lg={8} md={8} sm={8} xs={8}>
                     <Card className='secondRowLeadCard'>
-                        <LeadStatus timePeriodLeadList={timePeriodLeadList} />
+                        <StatusCard timePeriodLeadList={timePeriodLeadList} />
                     </Card>
                 </Col>
                 <Col xl={8} lg={8} md={8} sm={8} xs={8}>
                     <Card className='secondRowLeadCard'>
-                        <LeadDynamics leadList={leadList} />
+                        <DynamicsByMonthCard leadList={leadList} />
                     </Card>
                 </Col>
                 <Col xl={8} lg={8} md={8} sm={8} xs={8}>
                     <Card className='secondRowLeadCard'>
-                        <LeadOwner leadList={leadList} />
+                        <Top5LeadOwnersCard leadList={leadList} />
                     </Card>
                 </Col>
             </Row><br />
@@ -164,12 +164,12 @@ const LeadDashboard = () => {
             <Row align='top'>
                 <Col xl={10} lg={10} md={10} sm={10} xs={10}>
                     <Card className='stageCard'>
-                        <LeadStage timePeriodLeadList={timePeriodLeadList} />
+                        <StageCard timePeriodLeadList={timePeriodLeadList} />
                     </Card>
                 </Col>
                 <Col xl={14} lg={14} md={14} sm={14} xs={14}>
                     <Card className='customerNeedCard'>
-                        <LeadCustomerNeed timePeriodLeadList={timePeriodLeadList} />
+                        <CustomerNeedCard timePeriodLeadList={timePeriodLeadList} />
                     </Card>
                 </Col>
             </Row>
@@ -177,4 +177,4 @@ const LeadDashboard = () => {
     );
 }
 
-export default LeadDashboard;
+export default React.memo(LeadTab);

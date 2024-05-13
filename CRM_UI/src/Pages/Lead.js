@@ -82,15 +82,24 @@ const Lead = ({ screenType }) => {
     const [isEditLead, setIsEditLead] = useState(false);
     const [leadList, setLeadList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onSearch = (value) => {
-        const temp = filterData(leadList, value);
-        setFilterTable(temp);
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(leadList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
-    useEffect(() => {
-        fetchLeads();
-    }, []);
+    useEffect(() => {    
+        setLoading(true);
+        setTimeout(() => {
+            fetchLeads();
+            setLoading(false);
+        }, 1000);
+    }, [currentRole]);
 
     const fetchLeads = async () => {
         let res;
@@ -297,6 +306,7 @@ const Lead = ({ screenType }) => {
                 dataSource={filterTable === null ? leadList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 50%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditLead ? 'Update Lead' : 'Add Lead'}
@@ -317,4 +327,4 @@ const Lead = ({ screenType }) => {
     );
 }
 
-export default Lead;
+export default React.memo(Lead);

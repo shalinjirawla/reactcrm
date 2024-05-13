@@ -35,4 +35,4 @@ const EmailVerification = () => {
     );
 }
 
-export default EmailVerification;
+export default React.memo(EmailVerification);

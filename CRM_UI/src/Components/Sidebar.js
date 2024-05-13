@@ -41,7 +41,7 @@ const Sidebar = () => {
 
     const setSiderMenuItems = () => {
         let items = [
-            getItem('Dashboard', '', <HomeOutlined />),
+            getItem('Dashboards', '', <HomeOutlined />),
             getItem('Contacts', 'contact', <ContactsOutlined />),
             getItem('Leads', 'lead', <SiGoogleads />),
             getItem('Opportunities', 'opportunity', <TbBrandMyOppo />),
@@ -73,4 +73,4 @@ const Sidebar = () => {
     );
 }
 
-export default Sidebar;
+export default React.memo(Sidebar);

@@ -64,14 +64,23 @@ const Tenant = ({ screenType }) => {
     const [isEditUser, setIsEditUser] = useState(false);
     const [tenantList, setTenantList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const onSearch = (value) => {
-        const temp = filterData(tenantList, value);
-        setFilterTable(temp);
+    const onSearch = (value) => { 
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(tenantList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
     useEffect(() => {
-        if (currentRole === 'HostAdmin') fetchTenants();
+        setLoading(true);
+        setTimeout(() => {
+            if (currentRole === 'HostAdmin') fetchTenants();
+            setLoading(false);
+        }, 1000);
     }, [currentRole]);
 
     const fetchTenants = async () => {
@@ -230,6 +239,7 @@ const Tenant = ({ screenType }) => {
                 dataSource={filterTable === null ? tenantList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 6%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditUser ? 'Update Tenant' : 'Add Tenant'}
@@ -251,4 +261,4 @@ const Tenant = ({ screenType }) => {
     );
 }
 
-export default Tenant;
+export default React.memo(Tenant);

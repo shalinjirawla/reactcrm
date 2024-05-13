@@ -2,7 +2,7 @@ import { Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Bar } from "react-chartjs-2";
 
-const LeadDynamics = ({ leadList }) => {
+const DynamicsByMonthCard = ({ leadList }) => {
 
     const [last5MonthLead, setLast5MonthLead] = useState([]);
 
@@ -31,7 +31,7 @@ const LeadDynamics = ({ leadList }) => {
         }
 
         const array = Object.entries(last5MonthsData).map(([date, count]) => ({ date, count }));
-        setLast5MonthLead(array);
+        setLast5MonthLead(array.reverse());
     };
 
     const leadDynamicOptions = {
@@ -96,4 +96,4 @@ const LeadDynamics = ({ leadList }) => {
     );
 }
 
-export default LeadDynamics;
+export default DynamicsByMonthCard;

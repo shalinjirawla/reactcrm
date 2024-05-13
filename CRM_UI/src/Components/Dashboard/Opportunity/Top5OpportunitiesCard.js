@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Table } from 'antd';
 
-const Top5Opportunities = ({ opportunityList }) => {
+const Top5OpportunitiesCard = ({ opportunityList }) => {
 
     const [top5OpenOpportunities, setTop5OpenOpportunities] = useState([]);
 
@@ -47,4 +47,4 @@ const Top5Opportunities = ({ opportunityList }) => {
     );
 }
 
-export default Top5Opportunities;
+export default Top5OpportunitiesCard;

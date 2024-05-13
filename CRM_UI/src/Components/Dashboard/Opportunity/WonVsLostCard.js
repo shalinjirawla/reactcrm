@@ -1,20 +1,21 @@
+import { Row } from 'antd';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const WonVsLostCard = ({ opportunityList, wonCount, lostCount }) => {
+const WonVsLostCard = ({ opportunityList }) => {
 
-    const [last5MonthOpportunity, setLast5MonthOpportunity] = useState([]);
+    const [last4MonthOpportunity, setLast4MonthOpportunity] = useState([]);
 
     useEffect(() => {
-        if (opportunityList) fetchLast5MonthOpportunity();
+        if (opportunityList) fetchLast4MonthOpportunity();
     }, [opportunityList]);
 
-    const fetchLast5MonthOpportunity = () => {
+    const fetchLast4MonthOpportunity = () => {
         const currentMonth = dayjs().month() + 1;
         const currentYear = dayjs().year();
 
-        const last5MonthsData = {};
+        const last4MonthsData = {};
         for (let i = 0; i < 4; i++) {
             let targetMonth = currentMonth - i;
             let targetYear = currentYear;
@@ -22,33 +23,51 @@ const WonVsLostCard = ({ opportunityList, wonCount, lostCount }) => {
                 targetMonth += 12;
                 targetYear--;
             }
+
             const monthData = opportunityList.filter(item => {
                 const createdDate = dayjs(item.createdOn);
                 return createdDate.year() === targetYear && createdDate.month() + 1 === targetMonth;
             });
-            last5MonthsData[`${String(targetMonth).padStart(2, '0')}/${targetYear}`] = monthData.length;
+
+            const closedWonTotalAmount = monthData.reduce((total, item) => {
+                if (item?.opportunityStages?.stage === 'Closed won') {
+                    return total + item.contractValue;
+                }
+                return total;
+            }, 0);
+        
+            const closedLostTotalAmount = monthData.reduce((total, item) => {
+                if (item?.opportunityStages?.stage === 'Closed lost') {
+                    return total + item.contractValue;
+                }
+                return total;
+            }, 0);
+
+            last4MonthsData[`${String(targetMonth).padStart(2, '0')}/${targetYear}`] = {
+                'closedWon': closedWonTotalAmount,
+                'closedLost': closedLostTotalAmount
+            };
         }
 
-        const array = Object.entries(last5MonthsData).map(([date, count]) => ({ date, count }));
-        setLast5MonthOpportunity(array);
+        const array = Object.entries(last4MonthsData).map(([date, stageAmount]) => ({ date, stageAmount }));
+        setLast4MonthOpportunity(array.reverse());
     };
 
     const opportunityWonVsLostOptions = {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top',
+                position: 'top'
             },
             title: {
-                display: true,
-                text: 'Won vs Lost opportunities',
-            },
-        },
+                display: false
+            }
+        }
     };
 
     let opportunityWonVsLostData = {};
 
-    if (wonCount === 0 && lostCount === 0) {
+    if (last4MonthOpportunity.every(item => item?.stageAmount?.closedWon === 0 && item?.stageAmount?.closedLost === 0)) {
         opportunityWonVsLostData = {
             labels: ['No data found'],
             datasets: [
@@ -61,26 +80,30 @@ const WonVsLostCard = ({ opportunityList, wonCount, lostCount }) => {
         };
     } else {
         opportunityWonVsLostData = {
-            labels: last5MonthOpportunity.map(o => o?.date),
+            labels: last4MonthOpportunity.map(o => o?.date),
             datasets: [
                 {
-                    label: 'Win Rate',
-                    data: wonCount,
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                    label: 'Won',
+                    data: last4MonthOpportunity?.map(o => o?.stageAmount?.closedWon),
+                    backgroundColor: ['green'],
+                    borderColor: ['green'],
+                    borderWidth: 0.5
                 },
                 {
-                    label: 'Loss Rate',
-                    data: lostCount,
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    label: 'Lost',
+                    data: last4MonthOpportunity?.map(o => o?.stageAmount?.closedLost),
+                    backgroundColor: ['red'],
+                    borderColor: ['red'],
+                    borderWidth: 0.5
                 }
-            ],
+            ]
         };
     }
   
-
     return (
         <div>
-            <Bar options={opportunityWonVsLostOptions} data={opportunityWonVsLostData} height={125} />
+            <Row><h3 className='cardHeading'>Won Vs Lost Opportunities</h3></Row>
+            <Bar options={opportunityWonVsLostOptions} data={opportunityWonVsLostData} height={115} />
         </div>
     );
 }

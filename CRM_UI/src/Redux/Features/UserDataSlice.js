@@ -7,8 +7,8 @@ const initialState = {
     currentUserData: null,
     currentUserRole: null,
     tenantData: null,
-    contactData: [],
-    accountData: [],
+    contactData: null,
+    accountData: null,
     profileData: null
 }
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { leadCustomerNeedList } from '../../../Constants';
 
-const LeadCustomerNeed = ({ timePeriodLeadList }) => {
+const CustomerNeedCard = ({ timePeriodLeadList }) => {
 
     const [leadCustomerNeedCountList, setLeadCustomerNeedCountList] = useState({ additionalService: 0, bulkEmailManagementSystem: 0, hardware: 0, marketingManagementSystem: 0, needForOurProducts: 0, needForOurServices: 0, opportunityManagementSystem: 0, serviceManagementSystem: 0, software: 0, workflowAutomationSystem: 0 });
 
@@ -156,4 +156,4 @@ const LeadCustomerNeed = ({ timePeriodLeadList }) => {
     );
 }
 
-export default LeadCustomerNeed;
+export default CustomerNeedCard;

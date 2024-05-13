@@ -1,16 +1,10 @@
 /* -------------------------------- Tab --------------------------- */
 
-.dashboardTab .ant-tabs-nav {
-    position: fixed;
-    width: 82%;
-    z-index: 11;
-    background: #fff;
-}
 .dashboardTab .ant-tabs-tab-btn {
     font-size: var(--secondary-font);
 }
 .tabBodyTopMargin {
-    margin-top: 5%;
+    margin-top: 0.5%;
 }
 .spinLoader {
     font-size: 50px !important;
@@ -70,6 +64,3 @@
     height: 19rem;
     max-width: 97%;
 }
-/* .tableCell .ant-table-cell {
-    height: 2.5rem !important;
-} */

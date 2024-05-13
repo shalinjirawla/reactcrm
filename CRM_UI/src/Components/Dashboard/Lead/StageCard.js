@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 
-const LeadStage = ({ timePeriodLeadList }) => {
+const StageCard = ({ timePeriodLeadList }) => {
 
     const [leadStageCountList, setLeadStageCountList] = useState({ marketingQualifiedLead: 0, satisfied: 0, awaitingSale: 0, handoffToSales: 0, nurturing: 0, qualification: 0 });
 
@@ -151,7 +151,7 @@ const LeadStage = ({ timePeriodLeadList }) => {
                     ],
                     backgroundColor: ["green"],
                     borderColor: ["green"],
-                    borderWidth: 0.5,
+                    borderWidth: 0.5
                 }
             ]
         };
@@ -165,4 +165,4 @@ const LeadStage = ({ timePeriodLeadList }) => {
     );
 }
 
-export default LeadStage;
+export default StageCard;

@@ -75,15 +75,24 @@ const Task = ({ screenType }) => {
     const [isEditTask, setIsEditTask] = useState(false);
     const [taskList, setTaskList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const onSearch = (value) => {
-        const temp = filterData(taskList, value);
-        setFilterTable(temp);
+    const onSearch = (value) => {   
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(taskList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
-    useEffect(() => {
-        fetchTasks();
-    }, []);
+    useEffect(() => {    
+        setLoading(true);
+        setTimeout(() => {
+            fetchTasks();
+            setLoading(false);
+        }, 1000);
+    }, [currentRole]);
 
     const fetchTasks = async () => {
         let res;
@@ -276,6 +285,7 @@ const Task = ({ screenType }) => {
                 dataSource={filterTable === null ? taskList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 50%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditTask ? 'Update Task' : 'Add Task'}
@@ -295,4 +305,4 @@ const Task = ({ screenType }) => {
     );
 }
 
-export default Task;
+export default React.memo(Task);

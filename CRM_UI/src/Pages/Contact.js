@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppButton from '../Components/AppButton';
 import AppModal from '../Components/AppModal';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { addContact, deleteContact, getAllContact, getAllContactByTenant, getAllContactByTenantAdmin, getAllContactByUser, getExportExcelFileByContact, importExcelData, updateContact } from '../Api/Api';
+import { addContact, deleteContact, getAllContact, getAllContactByTenant, getAllContactByTenantAdmin, getAllContactByUser, getExportExcelFileByContact, updateContact } from '../Api/Api';
 import { contactTypeList } from '../Constants';
 import AddEditContactForm from '../Components/Contact/AddEditContactForm';
 import { useDispatch } from 'react-redux';
@@ -71,15 +71,24 @@ const Contact = ({ screenType }) => {
     const [isEditContact, setIsEditContact] = useState(false);
     const [contactList, setContactList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onSearch = (value) => {
-        const temp = filterData(contactList, value);
-        setFilterTable(temp);
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(contactList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
     useEffect(() => {
-        fetchContacts();
-    }, []);
+        setLoading(true);
+        setTimeout(() => {
+            fetchContacts();
+            setLoading(false);
+        }, 1000);
+    }, [currentRole]);
 
     const fetchContacts = async () => {
         let res;
@@ -268,12 +277,12 @@ const Contact = ({ screenType }) => {
                     </Row>
                 </Col>
             </Row><br /><br />
-
             <Table
                 columns={contactColumns}
                 dataSource={filterTable === null ? contactList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 50%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditContact ? 'Update Contact' : 'Add Contact'}
@@ -293,4 +302,4 @@ const Contact = ({ screenType }) => {
     );
 }
 
-export default Contact;
+export default React.memo(Contact);

@@ -44,14 +44,23 @@ const Role = ({ screenType }) => {
     const [isEditRole, setIsEditRole] = useState(false);
     const [roleList, setRoleList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const onSearch = (value) => {
-        const temp = filterData(roleList, value);
-        setFilterTable(temp);
+    const onSearch = (value) => {  
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(roleList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
-    useEffect(() => {
-        if (currentRole === 'HostAdmin') fetchRoles();
+    useEffect(() => { 
+        setLoading(true);
+        setTimeout(() => {
+            if (currentRole === 'HostAdmin') fetchRoles();
+            setLoading(false);
+        }, 1000);
     }, [currentRole]);
 
     const fetchRoles = async () => {
@@ -203,6 +212,7 @@ const Role = ({ screenType }) => {
                 dataSource={filterTable === null ? roleList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 6%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditRole ? 'Update Role' : 'Add Role'}
@@ -223,4 +233,4 @@ const Role = ({ screenType }) => {
     );
 }
 
-export default Role;
+export default React.memo(Role);

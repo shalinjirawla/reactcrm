@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppButton from '../Components/AppButton';
 import AppModal from '../Components/AppModal';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { addAccount, deleteAccount, getAllAccount, getAllAccountByTenant, getAllAccountByTenantAdmin, getAllAccountByUser, getExportExcelFileByAccount, importExcelData, updateAccount } from '../Api/Api';
+import { addAccount, deleteAccount, getAllAccount, getAllAccountByTenant, getAllAccountByTenantAdmin, getAllAccountByUser, getExportExcelFileByAccount, updateAccount } from '../Api/Api';
 import { accountCategoryList, accountIndustryList, accountTypeList } from '../Constants';
 import { filterData, parseData } from '../Helper';
 import { AuthContext } from '../Context/AuthProvider';
@@ -82,15 +82,24 @@ const Account = ({ screenType }) => {
     const [isEditAccount, setIsEditAccount] = useState(false);
     const [accountList, setAccountList] = useState([]);
     const [filterTable, setFilterTable] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onSearch = (value) => {
-        const temp = filterData(accountList, value);
-        setFilterTable(temp);
+        setLoading(true);
+        setTimeout(() => {
+            const temp = filterData(accountList, value);
+            setFilterTable(temp);
+            setLoading(false);
+        }, 1000);
     };
 
     useEffect(() => {
-        fetchAccounts();
-    }, []);
+        setLoading(true);
+        setTimeout(() => {
+            fetchAccounts();
+            setLoading(false);
+        }, 1000);
+    }, [currentRole]);
 
     const fetchAccounts = async () => {
         let res;
@@ -289,6 +298,7 @@ const Account = ({ screenType }) => {
                 dataSource={filterTable === null ? accountList : filterTable}
                 pagination={{ showSizeChanger: true }}
                 scroll={is1200 && { x: 'calc(700px + 50%)' }}
+                loading={loading}
             />
             <AppModal
                 title={isEditAccount ? 'Update Account' : 'Add Account'}
@@ -309,4 +319,4 @@ const Account = ({ screenType }) => {
     );
 }
 
-export default Account;
+export default React.memo(Account);
