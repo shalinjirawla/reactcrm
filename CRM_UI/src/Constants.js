@@ -1,18 +1,5 @@
 export const API_HOST = 'https://localhost:44328';
 
-export const filterSelectData = [
-    {
-        name: 'Active',
-        value: 'Active',
-        _id: '1'
-    },
-    {
-        name: 'InActive',
-        value: 'InActive',
-        _id: '0'
-    }
-];
-
 export const timePeriodList = [
     { id: 1, name: 'Today', _id: 'today' },
     { id: 2, name: 'Last 7 days', _id: 'days_7' },

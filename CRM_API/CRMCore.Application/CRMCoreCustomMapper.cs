@@ -23,18 +23,18 @@ namespace CRMCore.Application.Dto
         {
             CreateMap<User, UserVM>().ReverseMap();
             CreateMap<User, UserVM>().ReverseMap();
+            CreateMap<User, LoginVM>().ReverseMap();
+
             CreateMap<UserRole, UserRoleVM>().ReverseMap();
+
             CreateMap<Tenant, TenantVM>().ReverseMap();
             CreateMap<Tenant, TenantVerificationVM>().ReverseMap();
 
             CreateMap<Contact, ContactVM>().ReverseMap();
-            CreateMap<Task, TaskVM>().ReverseMap();
-            CreateMap<Opportunity, OpportunityVM>().ReverseMap();
             CreateMap<Lead, LeadVM>().ReverseMap();
+            CreateMap<Opportunity, OpportunityVM>().ReverseMap();
             CreateMap<Account, AccountVM>().ReverseMap();
-
-            CreateMap<User, LoginVM>().ReverseMap();
-            //CreateMap<Tenant, LoginVM>().ReverseMap();
+            CreateMap<Task, TaskVM>().ReverseMap();
         }
     }
 }

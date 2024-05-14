@@ -1,22 +1,23 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Suspense, lazy, useContext, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import Login from './Pages/Login';
-import Contact from './Pages/Contact';
-import Account from './Pages/Account';
-import Task from './Pages/Task';
-import Lead from './Pages/Lead';
-import Opportunity from './Pages/Opportunity';
-import Dashboard from './Pages/Dashboard';
-import User from './Pages/User';
 import { AuthContext } from './Context/AuthProvider';
 import ProtectedRoute from './Components/ProtectedRoute';
 import { Result } from 'antd';
 import AppButton from './Components/AppButton';
-import Tenant from './Pages/Tenant';
-import Registration from './Pages/Registration';
-import Profile from './Pages/Profile';
-import EmailVerification from './Pages/EmailVerification';
-import Role from './Pages/Role';
+
+const Registration = lazy(() => import('./Pages/Registration'));
+const EmailVerification = lazy(() => import('./Pages/EmailVerification'));
+const Dashboard = lazy(() => import('./Pages/Dashboard'));
+const Login = lazy(() => import('./Pages/Login'));
+const Profile = lazy(() => import('./Pages/Profile'));
+const Role = lazy(() => import('./Pages/Role'));
+const User = lazy(() => import('./Pages/User'));
+const Tenant = lazy(() => import('./Pages/Tenant'));
+const Contact = lazy(() => import('./Pages/Contact'));
+const Lead = lazy(() => import('./Pages/Lead'));
+const Opportunity = lazy(() => import('./Pages/Opportunity'));
+const Account = lazy(() => import('./Pages/Account'));
+const Task = lazy(() => import('./Pages/Task'));
 
 const MainRoutes = () => {
 
@@ -46,30 +47,32 @@ const MainRoutes = () => {
 
     return (
         <div>
-            <Routes>
-                <Route path='register' element={!user ? <Registration /> : ''} />
-                <Route path='verification' element={localStorage.getItem('registerTenantData') ? <EmailVerification /> : ''} />
-                <Route path='/' element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>} />
-                <Route path='/login' element={user ? <Dashboard /> : <Login />} />
-                {(currentRole === 'HostAdmin') && <Route path='/role' element={<ProtectedRoute user={user} module='HostAdmin'><Role screenType='Role' /></ProtectedRoute>} />}
-                {(currentRole !== 'HostUser' && currentRole !== 'Admin' && currentRole !== 'User') && <Route path='/user' element={<ProtectedRoute user={user} module='HostAdmin'><User screenType='User' /></ProtectedRoute>} />}
-                {(currentRole === 'HostAdmin') && <Route path='/tenant' element={<ProtectedRoute user={user} module='HostAdmin'><Tenant screenType='Tenant' /></ProtectedRoute>} />}
-                <Route path='/contact' element={<ProtectedRoute user={user}><Contact screenType='Contact' /></ProtectedRoute>} />
-                <Route path='/account' element={<ProtectedRoute user={user}><Account screenType='Account' /></ProtectedRoute>} />
-                <Route path='/task' element={<ProtectedRoute user={user}><Task screenType='Task' /></ProtectedRoute>} />
-                <Route path='/lead' element={<ProtectedRoute user={user}><Lead screenType='Lead' /></ProtectedRoute>} />
-                <Route path='/opportunity' element={<ProtectedRoute user={user}><Opportunity screenType='Opportunity' /></ProtectedRoute>} />
-                <Route path='/profile' element={<ProtectedRoute user={user}><Profile /></ProtectedRoute>} />
+            <Suspense fallback={<>Loading...</>}>
+                <Routes>
+                    <Route path='register' element={!user ? <Registration /> : ''} />
+                    <Route path='verification' element={localStorage.getItem('registerTenantData') ? <EmailVerification /> : ''} />
+                    <Route path='/' element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>} />
+                    <Route path='/login' element={user ? <Dashboard /> : <Login />} />
+                    <Route path='/profile' element={<ProtectedRoute user={user}><Profile /></ProtectedRoute>} />
+                    {(currentRole === 'HostAdmin') && <Route path='/role' element={<ProtectedRoute user={user} module='HostAdmin'><Role screenType='Role' /></ProtectedRoute>} />}
+                    {(currentRole !== 'HostUser' && currentRole !== 'Admin' && currentRole !== 'User') && <Route path='/user' element={<ProtectedRoute user={user} module='HostAdmin'><User screenType='User' /></ProtectedRoute>} />}
+                    {(currentRole === 'HostAdmin') && <Route path='/tenant' element={<ProtectedRoute user={user} module='HostAdmin'><Tenant screenType='Tenant' /></ProtectedRoute>} />}
+                    <Route path='/contact' element={<ProtectedRoute user={user}><Contact screenType='Contact' /></ProtectedRoute>} />
+                    <Route path='/lead' element={<ProtectedRoute user={user}><Lead screenType='Lead' /></ProtectedRoute>} />
+                    <Route path='/opportunity' element={<ProtectedRoute user={user}><Opportunity screenType='Opportunity' /></ProtectedRoute>} />
+                    <Route path='/account' element={<ProtectedRoute user={user}><Account screenType='Account' /></ProtectedRoute>} />
+                    <Route path='/task' element={<ProtectedRoute user={user}><Task screenType='Task' /></ProtectedRoute>} />
 
-                <Route path='/unauthorized' element={
-                    <Result
-                        status="403"
-                        title="403"
-                        subTitle="Sorry, you are not authorized to access this page."
-                        extra={<AppButton type="dashed" onClick={() => navigate('/')} label='Back Home' />}
-                    />
-                } />
-            </Routes>
+                    <Route path='/unauthorized' element={
+                        <Result
+                            status="403"
+                            title="403"
+                            subTitle="Sorry, you are not authorized to access this page."
+                            extra={<AppButton type="dashed" onClick={() => navigate('/')} label='Back Home' />}
+                        />
+                    } />
+                </Routes>
+            </Suspense>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import React from 'react';
 
-const AppModal = ({ children, open, title = null, footer = false, width, height, onOk, onCancel, ...props }) => {
+const AppModal = ({ children, open, title = null, footer = false, width, onOk, onCancel, ...props }) => {
     return (
         <div>
             <Modal
@@ -9,7 +9,6 @@ const AppModal = ({ children, open, title = null, footer = false, width, height,
                 open={open}
                 title={title}
                 onOk={onOk}
-                bodyStyle={{ height: height }}
                 style={{ borderRadius: '7px' }}
                 footer={footer}
                 destroyOnClose

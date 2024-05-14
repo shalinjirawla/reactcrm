@@ -1,20 +1,18 @@
-import { Card, Col, Form, Row } from 'antd';
+import { Card, Col, Row } from 'antd';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import Selectable from '../../Selectable';
-import { timePeriodList } from '../../../Constants';
 import { AuthContext } from '../../../Context/AuthProvider';
 import StageCard from './StageCard';
-import NumbersCard from '../Lead/NumbersCard';
+import NumbersCard from '../NumbersCard';
 import { parseData } from '../../../Helper';
 import dayjs from 'dayjs';
 import { getAllOpportunity, getAllOpportunityByTenant, getAllOpportunityByTenantAdmin, getAllOpportunityByTimePeriod, getAllOpportunityByUser } from '../../../Api/Api';
 import WonVsLostCard from './WonVsLostCard';
 import Top5OpportunitiesCard from './Top5OpportunitiesCard';
+import TimePeriodSelectable from '../TimePeriodSelectable';
 
 const OpportunityTab = () => {
 
     const { currentRole, currUserData } = useContext(AuthContext) ?? {};
-    const [timePeriodForm] = Form.useForm();
     const initialTimePeriodCall = useRef(false);
     const [opportunityList, setOpportunityList] = useState([]);
     const [timePeriodOpportunityList, setTimePeriodOpportunityList] = useState([]);
@@ -117,22 +115,7 @@ const OpportunityTab = () => {
         <div className='tabBodyTopMargin'>
             <Row align='middle' justify='end'>
                 <Col xl={4} lg={4} md={4} sm={4} xs={4}>
-                    <Form
-                        preserve={false}
-                        form={timePeriodForm}
-                        className='timePeriod'
-                    >
-                        <Selectable
-                            name='timePeriodForm'
-                            placeholder='By Time'
-                            firstName='name'
-                            data={timePeriodList}
-                            defaultVal='Last 7 days'
-                            handleSelectChange={(period) => {
-                                handleTimePeriodChange(period);
-                            }}
-                        />
-                    </Form>
+                    <TimePeriodSelectable handleTimePeriodChange={handleTimePeriodChange} />
                 </Col>
             </Row>
 

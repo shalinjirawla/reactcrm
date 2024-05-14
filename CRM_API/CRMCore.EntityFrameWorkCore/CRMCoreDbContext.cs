@@ -5,14 +5,11 @@ using CRMCore.EntityFrameWorkCore.Model.Opportunities;
 using CRMCore.EntityFrameWorkCore.Model.Tasks;
 using CRMCore.EntityFrameWorkCore.Model.Tenants;
 using CRMCore.EntityFrameWorkCore.Model.Users;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRMCore.EntityFrameWorkCore
 {
     public class CRMCoreDbContext : DbContext
-    //public class CRMCoreDbContext : IdentityDbContext<IdentityUser>
     {
         public CRMCoreDbContext(DbContextOptions<CRMCoreDbContext> options) : base(options) { }
 
@@ -46,8 +43,6 @@ namespace CRMCore.EntityFrameWorkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "HostAdmin", Password = "hostadmin", Email = "hostadmin@gmail.com", MobileNumber = "1234567890", RoleId = 1 }
             );
@@ -57,14 +52,5 @@ namespace CRMCore.EntityFrameWorkCore
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
         }
-
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        //    {
-        //        relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        //    }
-        //}
     }
 }
